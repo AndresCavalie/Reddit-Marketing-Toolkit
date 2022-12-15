@@ -1,0 +1,48 @@
+{%extends "base.html"%} {% block title%}Home{%endblock%} {%block content%}
+</br>
+<h1 align="center">Your {{search.name}} Search</h1>
+<h3 align="center">Manage your Searches</h3>
+
+
+    
+    <button  class="btn btn-primary" onClick= "backHome()" ><h4>Back</h4></button>
+    
+
+    <ul class="list-group list-group-flush" id="posts">
+        {% for post in search.posts%}
+
+        <li class="list-group list-group-item">
+    <!--{{post.title}}-->      
+          <div class = "post" style ="background-color:rgb(241, 241, 241);width: 50em; margin: auto; padding:2em; border-radius: .5em;">
+    <table style=" width: 40em; ">
+        <tr>
+            <td><p style ="display: inline; width:30em;">r/{{post.subreddit}} &#x2022; {{post.date}}</p></td>
+            
+        </tr>
+        <tr>
+          <td></br><a class = "postlink" href="https://www.reddit.com{{post.permalink}}" ><h1 style ="display: inline;">{{post.title}}</h1></a></td>
+        
+        </tr>
+        <tr>
+          <td></br><p style ="display: inline; font-size:larger word-break: break-all;
+            white-space: normal;">{{post.selftext}}</p></td>
+         
+        </tr>
+        <tr>
+            <td></br><p style ="display: inline;">keyword(s):{{post.keyword}}</p></td>
+           
+          </tr>
+      </table>
+</div>
+          <button
+            type="button"
+            class="close"
+            onClick="deletePost({{ post.id }})"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          
+        </li>
+        {%endfor%}
+      </ul>
+{%endblock%}

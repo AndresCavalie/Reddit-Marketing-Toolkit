@@ -1,0 +1,69 @@
+{%extends "base.html"%} {% block title%}Home{%endblock%} {%block content%}
+</br>
+<h1 align="center">Welcome to Reddit Toolkit</h1>
+
+<h5 align="center">Receive an email everytime a post includes your desired keywords and manage your search list!</h5>
+</br></br>
+<h3 align="center">Start by Creating a Search!</h3>
+    <div align="center">
+    <button  class="btn btn-primary" onClick= "newSearch()" ><h4>Add Search</h4></button>
+    
+    </div>
+    <div id="searchBox">
+    </br>
+    <form method = "POST">
+</br>
+        <b><h2>Your Search Name:</h2></b>
+    
+    <input type = "text" id = "searchNameId" name="searchNameName" class="form-control"></input>
+</br>
+        <label for = "subNameId"> <h3><span class="label label-warning">Subreddits to Search:</span></h3></label>
+    <input type = "text" id = "subNameId" name="subNameName" placeholder = "comma-separated list" class="form-control"></input>
+    
+            
+    </br>
+    <label for = "keyWordId"> <h3><span class="label label-success">Keywords to Filter Posts by:</span></h3></label>
+        <input type = "text" id = "keyWordId" name="keyWordName" placeholder = "comma-separated list" class="form-control"></input>
+       
+    </br>
+    <h2><b>Email Frequency:</b><h2>
+    <table class="table width" style = "width: 50%">
+        <tr>
+            <th style="text-align: center"><label for="everypost"><h3><span class="label label-info">Every Post</span></label></th>
+            <th style="text-align: center"><label for="day"><h3><span class="label label-success">Once a Day</span></label></th>
+            <th style="text-align: center"><label for="week"><h3><span class="label label-warning">Semi-Weekly</span></label></th>
+            <th style="text-align: center"><label for="2weeks"><h3><span class="label label-danger">Weekly</span></label></th>
+                
+        </tr>
+        <tr>
+            <td style="text-align: center"><input type="radio" id="everypost" name="frequency" value="everypost" class="form-check-input"></input></td>
+            <td style="text-align: center"><input type="radio" id="daily" name="frequency" value="daily" class="form-check-input"></input></td>
+            <td style="text-align: center"><input type="radio" id="semiweekly" name= "frequency" value="semiweekly" class="form-check-input"></input></td>
+            <td style="text-align: center"><input type="radio" id="weekly" name= "frequency" value="weekly"class="form-check-input"></input></td>
+        </tr>
+        
+    </table>
+</br>
+    <button class= "btn btn-primary" float = "right" type="submit"><h4>Submit</h4></button>
+   
+    </form>
+</br></br></br>
+    </div>
+</br>
+<ul class="list-group list-group-flush" id="searches">
+  {% for search in user.searches%}
+  <li class="list-group list-group-item">
+    <a onClick="enterSearch({{search.id}})">{{search.name}}</a>
+
+    <button
+      type="button"
+      class="close"
+      onClick="deleteSearch({{ search.id }})"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+    
+  </li>
+  {%endfor%}
+</ul>
+{%endblock%}
